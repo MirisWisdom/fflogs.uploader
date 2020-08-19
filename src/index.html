@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=900">
+	<link type="text/css" href="./assets/css/ff/global.css" rel="stylesheet" />
+	 <script src="./js/dependencies.js"></script>
+    <script src="./js/debug.js"></script>
+    <script src="./js/ff/game.js"></script>
+    <script src="./js/large_async_file_reader.js"></script>
+    <script src="./js/file.js"></script>
+    <script src="./js/lang.js"></script>
+    <script src="./js/main.js"></script>
+</head>
+<body onload="contentLoaded()">
+    <div id="background"></div>
+     
+    <webview id="parser" style="display:none" preload="./preload.js"></webview>
+    <script>
+	    document.getElementById('parser').setAttribute('src', scheme + "://" + host + "/client/parser");
+	</script>
+	
+    <div id="header-bar">
+        <span id="home-link" class="left bar-item" href="" onclick="goHome()"><script>document.write(trans('home'))</script></span>
+		
+		
+		<span id="language-link" class="right bar-item" onclick="showLanguageUI()"></span>
+        <span id="logout-link" class="right bar-item" style="display:none" href="" onclick="logout()"><script>document.write(trans('logout'))</script></span>
+		
+		<span id="release-notes-link" class="right bar-item" href="" onclick="viewReleaseNotes()"><script>document.write(trans('release_notes'))</script></span>
+
+		 <div style="clear:both"></div>
+        </div>
+        <div id="content">
+
+        <div id="logo-font">
+        <img id="logoimage">
+                          
+        <span id="title-if-text">
+       </span>
+        </div>
+       
+        <div id="startup-panel">
+	        <img id="button-spinny" src="./assets/img/spinny.gif">
+        </div>
+        
+        <div id="logincontent" style="display:none">
+                     
+        
+        <form method="POST" accept-charset="UTF-8" onsubmit="login(document.getElementById('email').value, document.getElementById('password').value); return false">	
+        <table cellspacing=10 class="dialog-table">
+                <tr style="vertical-align:middle"><td style="text-align:right">
+                <label for="email"><script>document.write(trans('email'))</script></label>
+                <td><input class="login-field" type="text" name="email" id="email">
+                <tr style="vertical-align:middle"><td style="text-align:right"><label for="password"><script>document.write(trans('password'))</script></label>
+                <td><input class="login-field" type="password" name="password" id="password">
+                <tr><td style="text-align:right"><a href="#" style="display:inline-block;font-size:14px" onclick="return forgotPassword()"><script>document.write(trans('forgot_password'))</script></a><td><button id="login-button" class="big-button right" type="submit"><script>document.write(trans('login'))</script></button>
+                </table>
+        </form>
+        </div>
+        
+        <div id="reportcontent" style="display:none">
+        
+        <div id="report-first-page">
+		
+		
+        <div id="version-info" style="display:none;"></div>
+
+       <div id="versions-container" onclick="selectVersionByTarget(event)">
+	    <script>
+		    for (var i in versions) {
+			    if (storedVersion == i)
+			    	selectedVersion = i
+			    document.write(' <span id="version-' + i + '" class="version-tab" ' + (storedVersion == i ? 'selected="true"' : '') + ' versionid="' + i + '">' + trans(versions[i]) + '</span>')
+			}
+	    </script>
+	    </div>
+
+              
+        <table cellspacing=10 id="clipboard-table" class="clipboard-table" style="width:100%">
+		 <tr><td style="font-size:18px; text-align:left"><script>document.write(trans('select_log_file_location'))</script>
+		<tr><td><div class="clipboard-file directory-file" id="clipboard-directory-file" onclick="browseForClipboardDirectory()"><span id="clipboardfile" style="display:none""></span><span id="clipboard-directory"></span> <button class="directory-button big-button right"><script>document.write(trans('choose_button'))</script></button></div></div><td><input class="directory-button big-button" type=button id="toggleWriteButton" value="Start Recording" onclick="toggleClipboardListener(document.getElementById('clipboard-directory').innerText)">
+		</table>
+
+        <table cellspacing=10 class="dialog-table">
+        <tr><td><button class="big-button wide" onclick="setReportUIMode('upload'); selectReportPage('upload')"><script>document.write(trans('upload_button'))</script></button><td><script>document.write(trans('upload_desc'))</script>
+        <tr><td><button class="big-button wide" onclick="setReportUIMode('livelog'); selectReportPage('upload')"><script>document.write(trans('livelog_button'))</script></button><td><script>document.write(trans('livelog_desc'))</script>        <tr><td><button class="big-button wide" onclick="setReportUIMode('split'); selectReportPage('upload')"><script>document.write(trans('splitlog_button'))</script></button><td><script>document.write(trans('splitlog_desc'))</script></table>
+        </div>
+        
+        <div id="report-upload-page" style="display:none">
+        
+        <table cellspacing=10 class="dialog-table" style="width:100%">
+        <tr id="file-chooser-description"><td colspan=2><script>document.write(trans('choose_file_for_upload'))</script>
+        <tr id="split-file-chooser-description" style="display:none"><td colspan=2><script>document.write(trans('choose_file_for_split'))</script>
+        <tr id="file-chooser-row"><td colspan=2><div class="directory-file" onclick="browseForFile()"><span id="logfile" style="display:none""></span><span id="logfile-display"></span> <button class="directory-button big-button right"><script>document.write(trans('choose_button'))</script></button></div></div>
+        <tr id="directory-chooser-description" style="display:none"><td colspan=2><span id="live-log-descriptive-text">
+<script>
+if (game.hasSingletonLogFile())
+  document.write(trans("choose_livelog_directory"))
+else
+  document.write(trans("choose_livelog_file"))
+</script>
+</span>
+        <tr id="directory-chooser-row" style="display:none"><td colspan=2><div class="directory-file" onclick="browseForLiveLogLocation()"><span id="directory" style="display:none"></span><span id="directory-display"></span> <button class="directory-button big-button right"><script>document.write(trans('choose_button'))</script></button></div></div>
+        <tr id="guild-chooser-description"><td colspan=2><script>document.write(trans('choose_guild'))</script>
+        <tr id="guild-chooser-controls"><td>
+        <button id="selected-guild-upload" class="bnet-char-tab"  onclick="showSelectGuildUI()"></button>
+        
+        <button id="guild-picker" class="big-button" onclick="showSelectGuildUI()"><script>document.write(trans('choose_button'))</script></button>
+        <td style="width:100%">
+        <div class="right" style="vertical-align:middle;margin-right:5px">
+        
+        <span id="privacy-0" class="region-tab" onclick="selectPrivacy(0)"><script>document.write(trans('public_report'))</script></span>
+        <span id="privacy-1" class="region-tab" onclick="selectPrivacy(1)"><script>document.write(trans('private_report'))</script></span>
+        <span id="privacy-2" class="region-tab" onclick="selectPrivacy(2)"><script>document.write(trans('unlisted_report'))</script></span>
+        
+        </div>
+        
+            
+            
+        </div> 
+        
+        <tr id="description-label"><td colspan=2><div style="display:inline-block; width:325px"><script>document.write(trans('description_report_label'))</script></div><div style="display:inline-block; width:373px"><input style="width:100%; margin-right:5px" type="text" id="description" name="description">
+        </div>
+        
+        <tr><td colspan=2><div id="fight-chooser-container" class="left" style="vertical-align:middle;"><input type=checkbox id="fight-chooser"> <label for="fight-chooser"></label>  <label for="fight-chooser"><script>document.write(trans('select_specific_raids'))</script></label></div> 
+        <button id="upload-button" class="big-button right" onclick="goButtonClicked()"><script>document.write(trans('go_button'))</script></button>
+        
+        </table>
+        
+        </div>
+        
+        <div id="report-guild-page" style="display:none; padding:10px" class="dialog-table">
+        
+        <div><script>document.write(trans('choose_guild_or_personal_logs'))</script></div>
+        <div id="guilds-container" onclick="selectGuildOrRegionByTarget(event)"></div>
+        
+        <div style="text-align:right">
+        <button id="finalize-guild" class="big-button" onclick="finalizeGuild()"><script>document.write(trans('ok_button'))</script></button>
+        </div>
+        
+        </div>
+        
+        <div id="report-language-page" style="display:none; padding:10px" class="dialog-table">
+        
+        <p><script>document.write(trans('choose_language'))</script></p>
+        <div id="languages-container" onclick="selectLanguageByTarget(event)">
+	    <script>
+		    for (var i in locales) {
+			    if (storedLanguage == i)
+			    	selectedLanguage = i
+			    document.write(' <span id="language-' + i + '" class="language-tab" ' + (storedLanguage == i ? 'selected="true"' : '') + ' languageid="' + i + '">' + locales[i] + '</span>')
+			}
+	    </script>
+	    </div>
+        
+        <div style="text-align:right">
+        <button id="finalize-language" class="big-button" onclick="finalizeLanguage()"><script>document.write(trans('ok_button'))</script></button>
+        </div>
+        
+        </div>
+                
+        <div id="report-progress-page" style="display:none; padding:10px" class="dialog-table">
+        
+        <div id="logfile-progress-container">
+        <div style="margin:8px 0"><span id="logfile-progress-status"><script>document.write(trans('proessing_log_file'))</script></span> <span id="logfile-progress-number"></span>...</div>
+        <div id="logfile-progress" class="progress-bar"><div class="progress-interior"></div></div>
+        </div>
+        
+        <p id="livelog-progress-status" style="display:none">
+        
+        </p>
+        
+        <div id="upload-progress-container" style="visibility:hidden">
+        <div style="margin:8px 0"><span id="upload-progress-status"><script>document.write(trans('uploading_fights'))</script></span> <span id="upload-progress-number"></span>...</div>
+        <div id="upload-progress" class="progress-bar"><div class="progress-interior"></div></div>
+        </div>
+        
+        <p style="text-align:center"><button id="cancelbutton" class="big-button" style="display:none" type=button onclick="cancelOrFinish('upload')"><script>document.write(trans('cancel_button'))</script></button>
+        <button class="big-button wide" style="display:none" id="viewlivelogbutton" onclick="viewLog()">View Report</button>
+        <button class="big-button wide" style="display:none" id="endlivelogbutton" onclick="stopLiveLoggingSession()">Stop</button>
+        </p>
+        </div>
+        
+        <div id="report-update-page" style="display:none; padding:10px" class="dialog-table">
+        
+        <div id="update-progress-container">
+        <div style="margin:8px 0"><span id="update-progress-status"><script>document.write(trans('downloading_update'))</script></span> <span id="update-progress-number"></span>...</div>
+        <div id="update-progress" class="progress-bar"><div class="progress-interior"></div></div>
+        </div>
+        
+        </div>
+
+
+        <div id="report-deletion-archival-page" style="display:none; padding:10px" class="dialog-table">
+        
+        <div style="margin-bottom:1em"><script>document.write(trans('click_go_home'))</script> <span id="view-report-description"><script>document.write(trans('view_report_desc'))</script></span> </div>
+        <p style="text-align:center" id="view-report-container">
+        <button type=button id="viewlogbutton" class="big-button wide" onclick="viewLog()"><script>document.write(trans('view_report_button'))</script></button>
+        </p>
+        <div id="deletion-archival-ui">
+        <div><script>document.write(trans('delete_or_archive_desc'))</script></div>
+        
+        <p style="text-align:center">
+        <button style="min-width:250px" type=button id="deletelogbutton" onclick="deleteLogFile()"><script>document.write(trans('delete_log_button'))</script></button>
+        <button style="min-width:250px" type=button id="archivelogbutton" onclick="archiveLogFile()"><script>document.write(trans('archive_log_button'))</script></button>
+        </p>
+        </div>
+        
+        </div>
+        
+        <div id="report-fights-page" style="display:none; padding:10px; position:relative;height:255px" class="dialog-table">
+        <select id="fights-list" size=10 multiple></select>
+        <div id="fight-details"><script>document.write(trans('fight_details'))</script></div>
+        
+        
+        <div id="include-trash-container" class="left" style="vertical-align:middle;"><input type=checkbox id="include-trash" onchange="includeTrashChanged()"> <label for="include-trash"></label>  <label for="include-trash"><script>document.write(trans('include_trash_fights'))</script></label></div>
+        
+        <button id="fights-button" class="big-button right" onclick="fightsButtonClicked()"><script>document.write(trans('go_button'))</script></button>
+        </div>
+        </div>
+        
+        <div class="ui-widget" style="font-size:12px; margin:5px 5px 0 5px; padding:0; display:none" id="errorblock">
+            <div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">
+                <div style="margin:5px 0"><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+                <strong><script>document.write(trans('error_label'))</script></strong> <span id="errortext"></span></div>
+            </div>
+        </div>
+        
+        <div class="ui-widget" style="font-size:12px; margin:5px 5px 0 5px; padding:0; display:none" id="warningblock">
+            <div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">
+                <div style="margin:5px 0"><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+                <strong><script>document.write(trans('warning_label'))</script></strong> <span id="warningtext"></span></div>
+            </div>
+        </div>
+        
+        <iframe style="display:none" id="fights"></iframe>
+         
+        <script>document.body.setAttribute('version', storedVersion)</script>
+        </body>
+        </html>

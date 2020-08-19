@@ -1,0 +1,55 @@
+@import url('../global.css');
+
+@font-face {
+    font-family: 'ralewayregular';
+    src: url('../Raleway-Regular-webfont.eot');
+    src: url('../Raleway-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../Raleway-Regular-webfont.woff') format('woff'),
+         url('../Raleway-Regular-webfont.ttf') format('truetype'),
+         url('../Raleway-Regular-webfont.svg#ralewayregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#background { background: url(../../img/warcraft/header-bfa-bg.jpg) center center; opacity:0.6; }
+
+#logoimage {
+	content: url('../../img/warcraft/header-logo.png');
+	width:72px;
+	height:72px;
+	margin-right:22px;
+	vertical-align:-14px;
+}
+
+#title-top {
+	position:absolute;top:0;height:72px; overflow:hidden; white-space:nowrap; text-shadow:2px 2px 10px black; 
+}
+
+#title-top-first {
+	color:rgb(230,230,230);
+}
+
+#title-bottom-first {
+	color:rgb(190,190,190)
+}
+
+#title-bottom {
+	position:absolute;top:40px; overflow:hidden; height:34px;
+}
+
+#title-bottom-interior {
+	display:block; margin-top:-40px	
+}
+
+#title-top-second {
+	color:rgb(230,230,230);
+}
+
+#title-bottom-second {
+	color:rgb(190,190,190)
+}
+
+#logo-font {
+	font-family: 'ralewayregular'; font-size:64px; position:relative;text-align:left;width:700px;margin:0 auto 20px auto; padding-left:60px; cursor:pointer; user-select: none;
+}
+
