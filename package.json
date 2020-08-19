@@ -1,0 +1,26 @@
+{
+  "name": "fflogs",
+  "appTitle": "FF Logs Uploader",
+  "version": "4.4.4",
+  "description": "FF Logs Uploader",
+  "main": "src/main.js",
+  "author": "fflogs",
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
+  },
+  "dependencies": {
+    "archiver": "^3.0.0",
+    "axios": "^0.18.0",
+    "concat-stream": "^1.6.2",
+    "dotenv": "^8.2.0",
+    "electron-debug": "^3.0.1",
+    "electron-is-dev": "^1.0.1",
+    "electron-log": "^2.2.17",
+    "electron-updater": "^4.0.0",
+    "form-data": "^2.3.3",
+    "jszip": "^3.1.5",
+    "md5": "^2.2.1",
+    "tmp": "^0.0.33"
+  }
+}
