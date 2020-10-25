@@ -1258,11 +1258,10 @@ async function checkForLiveLogChanges()
 			const msg = "No changes encountered. Our position is " + liveLogPosition + " and the file's size is " + logFileSize + "."
 			console.log(msg)
 			logToDebugPanel(msg)
-            unchangedCount++
         }
 
         // If no changes after 120 seconds
-		if (unchangedCount == 24) { // 120 seconds more or less.
+		if (++unchangedCount == 24) { // 120 seconds more or less.
 			var fights = await ipcCollectFightsFromParser(true, false)
 			if (fights == null) // Stale
 				return

@@ -88,7 +88,7 @@
 	"stop_recording_button": "停止记录",
 	"delete_button": "删除",
 	"archive_button": "存档",
-	"ff_act_warning": "Version 2.0.2.9 or higher of the ACT plug-in is required for Shadowbringers log uploads.",
+	"ff_act_warning": "上传暗影之逆焰日志需要版本2.0.2.9及以上的ACT解析插件。",
 	"warcraft_difficulty_mythic": "史诗难度",
 	"warcraft_difficulty_heroic": "英雄难度",
 	"warcraft_difficulty_flex": "弹性难度",
@@ -98,5 +98,7 @@
 	"warcraft_difficulty_mythic_plus": "史诗钥石",
 	"live_version": "正式服",
 	"classic_version": "怀旧服",
-	"test_version": "测试服"
+	"test_version": "测试服",
+	"forgot_password": "忘记密码？",
+	"release_notes": "更新说明"
 }

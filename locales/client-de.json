@@ -98,5 +98,7 @@
 	"warcraft_difficulty_mythic_plus": "Mythisch+",
 	"live_version": "Live",
 	"classic_version": "Classic",
-	"test_version": "Test"
+	"test_version": "Test",
+	"forgot_password": "Passwort vergessen?",
+	"release_notes": "Versionshinweise"
 }

@@ -88,7 +88,7 @@
 	"stop_recording_button": "기록 중단",
 	"delete_button": "삭제",
 	"archive_button": "보관",
-	"ff_act_warning": "Version 2.0.2.9 or higher of the ACT plug-in is required for Shadowbringers log uploads.",
+	"ff_act_warning": "칠흑의 반역자 로그를 업로드 하기 위해선 ACT 플러그인 버전이 2.0.2.9이거나 이상이여야 합니다.",
 	"warcraft_difficulty_mythic": "신화",
 	"warcraft_difficulty_heroic": "영웅",
 	"warcraft_difficulty_flex": "탄력적 공격대",
@@ -98,5 +98,7 @@
 	"warcraft_difficulty_mythic_plus": "신화+",
 	"live_version": "정식",
 	"classic_version": "클래식",
-	"test_version": "테스트"
+	"test_version": "테스트",
+	"forgot_password": "비밀번호 찾기",
+	"release_notes": "패치 내역"
 }

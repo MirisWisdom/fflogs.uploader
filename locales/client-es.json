@@ -88,7 +88,7 @@
 	"stop_recording_button": "Detener la grabación",
 	"delete_button": "Borrar",
 	"archive_button": "Archivar",
-	"ff_act_warning": "Version 2.0.2.9 or higher of the ACT plug-in is required for Shadowbringers log uploads.",
+	"ff_act_warning": "Se requiere la versión 2.0.2.9 o mayor del plug-in ACT para cargar los archivos de registro de Shadowbringers.",
 	"warcraft_difficulty_mythic": "Mítico",
 	"warcraft_difficulty_heroic": "Heroico",
 	"warcraft_difficulty_flex": "Flexible",
@@ -96,7 +96,9 @@
 	"warcraft_difficulty_lfr": "BDB",
 	"warcraft_difficulty_challenge_mode": "MD",
 	"warcraft_difficulty_mythic_plus": "Mítico+",
-	"live_version": "Live",
-	"classic_version": "Classic",
-	"test_version": "Test"
+	"live_version": "En Vivo",
+	"classic_version": "Clásico",
+	"test_version": "Prueba",
+	"forgot_password": "¿Contraseña olvidada?",
+	"release_notes": "Notas de Lanzamiento"
 }

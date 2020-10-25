@@ -88,7 +88,7 @@
 	"stop_recording_button": "Остановить запись.",
 	"delete_button": "Удалить",
 	"archive_button": "Архивировать",
-	"ff_act_warning": "Version 2.0.2.9 or higher of the ACT plug-in is required for Shadowbringers log uploads.",
+	"ff_act_warning": "Для загрузки логов необходим ACT плагин версии 2.0.2.9 или выше.",
 	"warcraft_difficulty_mythic": "Эпохальный",
 	"warcraft_difficulty_heroic": "Героический",
 	"warcraft_difficulty_flex": "Гибкий",
@@ -98,5 +98,7 @@
 	"warcraft_difficulty_mythic_plus": "Эпохальный+",
 	"live_version": "Прямой Эфир",
 	"classic_version": "Классический",
-	"test_version": "Тест"
+	"test_version": "Тест",
+	"forgot_password": "Забыли пароль?",
+	"release_notes": "Список изменений"
 }
