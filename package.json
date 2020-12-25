@@ -1,7 +1,7 @@
 {
   "name": "fflogs",
   "appTitle": "FF Logs Uploader",
-  "version": "4.4.5",
+  "version": "4.4.7",
   "description": "FF Logs Uploader",
   "main": "src/main.js",
   "author": "fflogs",

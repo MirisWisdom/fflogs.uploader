@@ -33,7 +33,7 @@ class Game {
 		return 1
 	}
 
-	versions() { return { "live": "live_version", "test": "test_version" }; }
+	versions() { return null; }
 	
 	nameForDifficulty(difficulty, logVersion) {
 		return "";

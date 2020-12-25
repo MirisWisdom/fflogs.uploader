@@ -52,9 +52,6 @@ class Game {
 	}
 	
 	contentLoaded() {
-		var versionInfo = document.getElementById('version-info');
-		versionInfo.innerHTML = trans("ff_act_warning");
-		
 		document.getElementById('include-trash-container').style.display = 'none'
 	}
 	
